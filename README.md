@@ -42,6 +42,9 @@ local function commands(msg,plr)
             if string.find(SplitCMD[1], ':fling') then
                 player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
             end
+	    if string.find(SplitCMD[1], ':jump') then
+		game.Players.LocalPlayer.Character.Humanoid.Jump = true
+            end
         end
 end
 
