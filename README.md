@@ -50,6 +50,10 @@ local function commands(msg,plr)
 		wait(.25)
 		player.Character.HumanoidRootPart.Anchored = true
             end
+	    if string.find(SplitCMD[1], ':say') then
+		local extracted = string.match(msg, ";(.*)")
+		game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(extracted, "All")
+            end
         end
 end
 
