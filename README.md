@@ -4,11 +4,24 @@ end
 
 local success,err = pcall(function()
 
-
 Players = game:GetService('Players')
 player = game.Players.LocalPlayer
 
-local function commands(msg,plr)
+alt = true
+for i,v in pairs(game:GetService('Players'):GetChildren()) do
+    local FindMasters = table.find(getgenv().Masters, v.UserId)
+    if FindMasters then
+	    if player.UserId == v.UserId then
+		    alt = false
+		    print('Currently a master')
+        else
+            print('Currently an alt')
+        end
+    end
+end
+
+if alt then
+    local function commands(msg,plr)
         local CurrentUserID = game:GetService('Players'):GetPlayerByUserId(plr)
         local Msg = string.lower(msg)
         local SplitCMD = string.split(Msg,' ')
@@ -42,39 +55,41 @@ local function commands(msg,plr)
             if string.find(SplitCMD[1], ':fling') then
                 player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
             end
-	    if string.find(SplitCMD[1], ':jump') then
-		game.Players.LocalPlayer.Character.Humanoid.Jump = true
+	        if string.find(SplitCMD[1], ':jump') then
+		        game.Players.LocalPlayer.Character.Humanoid.Jump = true
             end
-	    if string.find(SplitCMD[1], ':airlock') then
-		game.Players.LocalPlayer.Character.Humanoid.Jump = true
-		wait(.25)
-		player.Character.HumanoidRootPart.Anchored = true
+	        if string.find(SplitCMD[1], ':airlock') then
+		        game.Players.LocalPlayer.Character.Humanoid.Jump = true
+		        wait(.25)
+		        player.Character.HumanoidRootPart.Anchored = true
             end
-	    if string.find(SplitCMD[1], ':say') then
-		local extracted = string.match(msg, ";(.*)")
-		game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(extracted, "All")
+	        if string.find(SplitCMD[1], ':say') then
+		        local extracted = string.match(msg, ";(.*)")
+		        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(extracted, "All")
             end
         end
-end
-
-Players.PlayerAdded:Connect(function(plr)
-    local FindMasters = table.find(getgenv().Masters, plr.UserId)
-    if FindMasters then
-        print('found')
-        plr.Chatted:Connect(function(msg)
-            commands(msg, plr.UserId)
-        end)
     end
-end)
 
-for i,v in pairs(game:GetService('Players'):GetChildren()) do
-    local FindMasters = table.find(getgenv().Masters, v.UserId)
-    if FindMasters then
-        print('found')
-        v.Chatted:Connect(function(msg)
-           commands(msg, v.UserId)
-        end)
+    Players.PlayerAdded:Connect(function(plr)
+        local FindMasters = table.find(getgenv().Masters, plr.UserId)
+        if FindMasters then
+            print('found')
+            plr.Chatted:Connect(function(msg)
+                commands(msg, plr.UserId)
+            end)
+        end
+    end)
+
+    for i,v in pairs(game:GetService('Players'):GetChildren()) do
+        local FindMasters = table.find(getgenv().Masters, v.UserId)
+        if FindMasters then
+            print('found')
+            v.Chatted:Connect(function(msg)
+                commands(msg, v.UserId)
+            end)
+        end
     end
+
 end
 
 end)
