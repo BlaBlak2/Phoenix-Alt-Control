@@ -45,7 +45,7 @@ local function commands(msg,plr)
 	    if string.find(SplitCMD[1], ':jump') then
 		game.Players.LocalPlayer.Character.Humanoid.Jump = true
             end
-	    if string.find(SplitCMD[1], ':airwalk') then
+	    if string.find(SplitCMD[1], ':airlock') then
 		game.Players.LocalPlayer.Character.Humanoid.Jump = true
 		wait(.25)
 		player.Character.HumanoidRootPart.Anchored = true
