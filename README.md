@@ -14,8 +14,6 @@ for i,v in pairs(game:GetService('Players'):GetChildren()) do
 	    if player.UserId == v.UserId then
 		    alt = false
 		    print('Currently a master')
-        else
-            print('Currently an alt')
         end
     end
 end
