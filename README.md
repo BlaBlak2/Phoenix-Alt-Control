@@ -5,14 +5,9 @@ end
 local success,err = pcall(function()
 
 
--- getgenv().Masters = {
---    1348505,
--- }
-
-
 Players = game:GetService('Players')
 player = game.Players.LocalPlayer
--- kickmsg = 'CUSTOM MESSAGE'
+
 local function commands(msg,plr)
         local CurrentUserID = game:GetService('Players'):GetPlayerByUserId(plr)
         local Msg = string.lower(msg)
