@@ -7,7 +7,7 @@ local success,err = pcall(function()
 Players = game:GetService('Players')
 player = game.Players.LocalPlayer
 
-3dRenderingEnabled = getgenv().3dRendering
+game:GetService("RunService"):Set3dRenderingEnabled(getgenv().Rendering).Rendering)
 
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
