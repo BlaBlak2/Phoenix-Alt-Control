@@ -11,13 +11,6 @@ if not getgenv().Rendering3D then
     game:GetService("RunService"):Set3dRenderingEnabled(false)
 end
 
-local vu = game:GetService("VirtualUser")
-game:GetService("Players").LocalPlayer.Idled:connect(function()
-   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-   wait(1)
-   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-end)
-
 alt = true
 for i,v in pairs(game:GetService('Players'):GetChildren()) do
     local FindMasters = table.find(getgenv().Masters, v.UserId)
