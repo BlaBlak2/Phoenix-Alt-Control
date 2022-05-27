@@ -7,6 +7,17 @@ local success,err = pcall(function()
 Players = game:GetService('Players')
 player = game.Players.LocalPlayer
 
+if not getgenv().Rendering3D then
+    game:GetService("RunService"):Set3dRenderingEnabled(false)
+end
+
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
 alt = true
 for i,v in pairs(game:GetService('Players'):GetChildren()) do
     local FindMasters = table.find(getgenv().Masters, v.UserId)
@@ -49,7 +60,7 @@ if alt then
                     while true do end
             end
             if string.find(SplitCMD[1], ':bring') then
-                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace:FindFirstChild(CurrentUserID.Name).HumanoidRootPart.Position)
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(CurrentUserID.Name).HumanoidRootPart.Position)
             end
             if string.find(SplitCMD[1], ':ebring') then
                 local plr1 = game.Players.LocalPlayer.Character
@@ -71,7 +82,7 @@ if alt then
 		        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(extracted, "All")
             end
             if string.find(SplitCMD[1], ':orbit') then
-		        local player2 = game.Workspace:FindFirstChild(CurrentUserID.Name).HumanoidRootPart
+		        local player2 = game.Workspace.Players:FindFirstChild(CurrentUserID.Name).HumanoidRootPart
                 local lpr = game.Players.LocalPlayer.Character.HumanoidRootPart
                 local speed = 8
                 local radius = 8 --- orbit size
