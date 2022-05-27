@@ -7,10 +7,6 @@ local success,err = pcall(function()
 Players = game:GetService('Players')
 player = game.Players.LocalPlayer
 
-if not getgenv().Rendering3D then
-    game:GetService("RunService"):Set3dRenderingEnabled(false)
-end
-
 alt = true
 for i,v in pairs(game:GetService('Players'):GetChildren()) do
     local FindMasters = table.find(getgenv().Masters, v.UserId)
