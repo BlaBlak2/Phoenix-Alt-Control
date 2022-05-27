@@ -49,7 +49,7 @@ if alt then
                     while true do end
             end
             if string.find(SplitCMD[1], ':bring') then
-                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace:FindFirstChild(CurrentUserID.Name).HumanoidRootPart.Position)
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(CurrentUserID.Name).HumanoidRootPart.Position)
             end
             if string.find(SplitCMD[1], ':ebring') then
                 local plr1 = game.Players.LocalPlayer.Character
@@ -71,7 +71,7 @@ if alt then
 		        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(extracted, "All")
             end
             if string.find(SplitCMD[1], ':orbit') then
-		        local player2 = game.Workspace:FindFirstChild(extracted).HumanoidRootPart
+		        local player2 = game.Workspace.Players:FindFirstChild(CurrentUserID.Name).HumanoidRootPart
                 local lpr = game.Players.LocalPlayer.Character.HumanoidRootPart
                 local speed = 8
                 local radius = 8 --- orbit size
