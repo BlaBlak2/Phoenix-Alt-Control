@@ -25,6 +25,7 @@ if alt then
         local SplitCMD = string.split(Msg,' ')
         local Lower = string.lower(player.Name)
         local Allowed = string.find(Lower, SplitCMD[2])
+        local extracted = string.match(msg, ";(.*)")
         if Allowed then
             if string.find(SplitCMD[1], ':freeze') then
                 player.Character.HumanoidRootPart.Anchored = true
@@ -50,6 +51,11 @@ if alt then
             if string.find(SplitCMD[1], ':bring') then
                 player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(CurrentUserID.Name).HumanoidRootPart.Position)
             end
+            if string.find(SplitCMD[1], ':ebring') then
+                local plr1 = game.Players.LocalPlayer.Character
+                local plr2 = game.Workspace:FindFirstChild(extracted)
+                plr1.HumanoidRootPart.CFrame = plr2.HumanoidRootPart.CFrame * CFrame.new(0,2,0)
+            end
             if string.find(SplitCMD[1], ':fling') then
                 player.Character.HumanoidRootPart.Velocity = Vector3.new(500000,500000,500000)
             end
@@ -62,7 +68,6 @@ if alt then
 		        player.Character.HumanoidRootPart.Anchored = true
             end
 	        if string.find(SplitCMD[1], ':say') then
-		        local extracted = string.match(msg, ";(.*)")
 		        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(extracted, "All")
             end
         end
