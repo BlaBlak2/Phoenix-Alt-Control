@@ -49,7 +49,7 @@ if alt then
                     while true do end
             end
             if string.find(SplitCMD[1], ':bring') then
-                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Players:FindFirstChild(CurrentUserID.Name).HumanoidRootPart.Position)
+                player.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace:FindFirstChild(CurrentUserID.Name).HumanoidRootPart.Position)
             end
             if string.find(SplitCMD[1], ':ebring') then
                 local plr1 = game.Players.LocalPlayer.Character
@@ -69,6 +69,23 @@ if alt then
             end
 	        if string.find(SplitCMD[1], ':say') then
 		        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(extracted, "All")
+            end
+            if string.find(SplitCMD[1], ':orbit') then
+		        local player2 = game.Workspace:FindFirstChild(extracted).HumanoidRootPart
+                local lpr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                local speed = 8
+                local radius = 8 --- orbit size
+                local eclipse = 1 --- width of orbit
+                local rotation = CFrame.Angles(0,0,0) --only works for unanchored parts (not localplayer)
+                local sin, cos = math.sin, math.cos
+                local rotspeed = math.pi*2/speed
+                eclipse = eclipse * radius
+                local runservice = game:GetService('RunService')
+                local rot = 0
+                game:GetService('RunService').Stepped:connect(function(t, dt)
+                    rot = rot + dt * rotspeed
+                    lpr.CFrame = rotation * CFrame.new(sin(rot)*eclipse, 0, cos(rot)*radius) + player2.Position
+                end)
             end
         end
     end
