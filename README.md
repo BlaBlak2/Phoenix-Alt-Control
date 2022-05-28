@@ -7,10 +7,6 @@ local success,err = pcall(function()
 Players = game:GetService('Players')
 player = game.Players.LocalPlayer
 
-if not getgenv().Rendering3D then
-    game:GetService("RunService"):Set3dRenderingEnabled(false)
-end
-
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -30,6 +26,9 @@ for i,v in pairs(game:GetService('Players'):GetChildren()) do
 end
 
 if alt then
+    if not getgenv().Rendering3D then
+    	game:GetService("RunService"):Set3dRenderingEnabled(false)
+    end
     local function commands(msg,plr)
         local CurrentUserID = game:GetService('Players'):GetPlayerByUserId(plr)
         local Msg = string.lower(msg)
