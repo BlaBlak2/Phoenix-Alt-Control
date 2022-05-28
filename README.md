@@ -29,6 +29,9 @@ if alt then
     if not getgenv().Rendering3D then
     	game:GetService("RunService"):Set3dRenderingEnabled(false)
     end
+    if getgenv().fps5 then
+	setfpscap(5)
+    end
     local function commands(msg,plr)
         local CurrentUserID = game:GetService('Players'):GetPlayerByUserId(plr)
         local Msg = string.lower(msg)
